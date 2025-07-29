@@ -6,49 +6,50 @@ import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 import { Typewriter } from "react-simple-typewriter";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from 'next/image';
 gsap.registerPlugin(ScrollTrigger);
-
 
 export default function Home() {
   const imageRef = useRef(null);
   const contentRef = useRef(null);
   const cardsRef = useRef([]);
   const formRef = useRef(null);
+  const projectsContainerRef = useRef(null);
+  const scrollContentRef = useRef(null);
+
   const projects = [
-  {
-    title: "MY PORTFOLIO",
-    desc: "A PORTFOLIO OF MINE MADE USING NEXT.JS AND GSAP",
-    img: "manish.jpg",
-  },
-  {
-    title: "CHAT-BOT",
-    desc: "A GROUP CHATTING PLATFORM MADE USING SOCKET AND NEXT.JS ",
-    img: "https://d2vrvpw63099lz.cloudfront.net/do-i-need-a-chatbot/header-chat-box.png",
-  },
-  {
-    title: "Weather App",
-    desc: "Weather forecast web app using API integration",
-    img: "https://images.nationalgeographic.org/image/upload/t_edhub_resource_key_image/v1638886301/EducationHub/photos/lightning-bolts.jpg",
-  },
-  {
-    title: "ECCOMERCE WEBSITE",
-    desc: "A SLEEK MODERN ECOOMERCE WEBSITE USING NEXT.JS",
-    img: "https://miro.medium.com/v2/resize:fit:1340/0*EVTnmRoDHotaLydW",
-  },
-  {
-    title: "DAHEJ CALCULATER",
-    desc: "A MINIMAL PROJECT FOR AWARENESS OF DOWRY IS CRIME",
-    img: "https://ijlsi.com/wp-content/uploads/Dowry-System-images.jpg",
-  },
-  
-];
-
-const projectsContainerRef = useRef(null);
-const scrollContentRef = useRef(null);
-
+    {
+      title: "MY PORTFOLIO",
+      desc: "A PORTFOLIO OF MINE MADE USING NEXT.JS AND GSAP",
+      img: "/manish.jpg",
+    },
+    {
+      title: "CHAT-BOT",
+      desc: "A GROUP CHATTING PLATFORM MADE USING SOCKET AND NEXT.JS ",
+      img: "https://d2vrvpw63099lz.cloudfront.net/do-i-need-a-chatbot/header-chat-box.png",
+    },
+    {
+      title: "Weather App",
+      desc: "Weather forecast web app using API integration",
+      img: "https://images.nationalgeographic.org/image/upload/t_edhub_resource_key_image/v1638886301/EducationHub/photos/lightning-bolts.jpg",
+    },
+    {
+      title: "ECCOMERCE WEBSITE",
+      desc: "A SLEEK MODERN ECOOMERCE WEBSITE USING NEXT.JS",
+      img: "https://miro.medium.com/v2/resize:fit:1340/0*EVTnmRoDHotaLydW",
+    },
+    {
+      title: "DAHEJ CALCULATER",
+      desc: "A MINIMAL PROJECT FOR AWARENESS OF DOWRY IS CRIME",
+      img: "https://ijlsi.com/wp-content/uploads/Dowry-System-images.jpg",
+    },
+  ];
 
   const scrollToSection = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   useEffect(() => {
@@ -59,7 +60,7 @@ const scrollContentRef = useRef(null);
         duration: 1.2,
         ease: "power3.out",
       });
-    } // Missing closing bracket added here
+    }
     gsap.from(contentRef.current, {
       x: 200,
       opacity: 0,
@@ -67,32 +68,33 @@ const scrollContentRef = useRef(null);
       delay: 0.3,
       ease: "power3.out",
     });
-  }, []); // Add dependencies if needed
-useEffect(() => {
-  if (!scrollContentRef.current || !projectsContainerRef.current) return;
+  }, []);
 
-  gsap.to(scrollContentRef.current, {
-    x: () =>
-      -(
-        scrollContentRef.current.scrollWidth -
-        projectsContainerRef.current.offsetWidth
-      ),
-    ease: "none",
-    scrollTrigger: {
-      trigger: projectsContainerRef.current,
-      start: "top top",
-      end: () =>
-        "+=" +
-        (scrollContentRef.current.scrollWidth -
-          projectsContainerRef.current.offsetWidth),
-      pin: true,
-      scrub: 1,
-      invalidateOnRefresh: true,
-    },
-  });
+  useEffect(() => {
+    if (!scrollContentRef.current || !projectsContainerRef.current) return;
 
-  return () => ScrollTrigger.killAll();
-}, []);
+    gsap.to(scrollContentRef.current, {
+      x: () =>
+        -(
+          scrollContentRef.current.scrollWidth -
+          projectsContainerRef.current.offsetWidth
+        ),
+      ease: "none",
+      scrollTrigger: {
+        trigger: projectsContainerRef.current,
+        start: "top top",
+        end: () =>
+          "+=" +
+          (scrollContentRef.current.scrollWidth -
+            projectsContainerRef.current.offsetWidth),
+        pin: true,
+        scrub: 1,
+        invalidateOnRefresh: true,
+      },
+    });
+
+    return () => ScrollTrigger.killAll();
+  }, []);
 
   const particlesInit = async (main) => {
     await loadFull(main);
@@ -100,117 +102,101 @@ useEffect(() => {
 
   return (
     <div className="scroll-smooth font-sans">
-      {/* Navbar */}
-      {/* <nav className="fixed w-full top-0 bg-white shadow-md z-50 flex justify-around py-4 font-semibold">
-        {['home', 'about', 'skills', 'projects', 'contact'].map((id) => (
-          <button
-            key={id}
-            onClick={() => scrollToSection(id)}
-            className="hover:text-purple-600 transition"
-          >
-            {id.toUpperCase()}
-          </button>
-        ))}
-      </nav> */}
-
-      {/* Hero */}
-     <section
-  id="home"
-  className="relative min-h-screen flex items-center justify-center md:justify-start bg-gradient-to-br from-blue-100 to-purple-100 px-6 overflow-hidden"
->
-  {/* Particles Background */}
-  <Particles
-    id="tsparticles"
-    init={particlesInit}
-    className="absolute inset-0 z-0"
-    options={{
-      background: { color: { value: "transparent" } },
-      fpsLimit: 60,
-      interactivity: {
-        events: {
-          onHover: { enable: true, mode: "repulse" },
-          resize: true,
-        },
-      },
-      particles: {
-        color: { value: "#7c3aed" },
-        links: {
-          color: "#7c3aed",
-          distance: 150,
-          enable: true,
-          opacity: 0.5,
-          width: 1,
-        },
-        collisions: { enable: false },
-        move: {
-          direction: "none",
-          enable: true,
-          outModes: { default: "bounce" },
-          speed: 1,
-        },
-        number: { value: 40 },
-        opacity: { value: 0.4 },
-        shape: { type: "circle" },
-        size: { value: { min: 1, max: 3 } },
-      },
-      detectRetina: true,
-    }}
-  />
-
-  {/* Main Content */}
-  <div className="relative z-10 max-w-7xl w-full flex flex-col md:flex-row items-center md:items-start gap-12">
-    {/* Left - Attractive Image */}
-    <div
-      ref={imageRef}
-      className="w-[400px] h-[400px] border-4 border-gradient-to-tr from-purple-500 via-pink-400 to-yellow-300 rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 hover:rotate-1 transition duration-500 ease-in-out"
-    >
-      <img
-        src="/manish.jpg"
-        alt="Manish"
-        className="w-full h-full object-cover"
-      />
-    </div>
-
-    {/* Right - Content */}
-    <div
-      ref={contentRef}
-      className="flex-1 text-center md:text-left space-y-4 md:mt-12"
-    >
-      <h1 className="text-5xl font-extrabold text-gray-800">
-        Hi, I'm{" "}
-        <span className="text-purple-600 hover:text-green-500 transition-colors duration-300 cursor-pointer">
-          Manish
-        </span>
-      </h1>
-
-      <p className="text-xl text-gray-700">
-        <Typewriter
-          words={["Frontend Developer", "React Enthusiast", "Next.js", "MongoDB"]}
-          loop={true}
-          cursor
-          cursorStyle="|"
-          typeSpeed={70}
-          deleteSpeed={50}
-          delaySpeed={1000}
-        />
-      </p>
-
-      <p className="text-xl text-gray-700">
-        Frontend Developer | Passionate Coder with high dreams
-      </p>
-      <p className="text-2xl text-red-500 font-semibold">
-        Going more deep with passion of code
-      </p>
-      <a
-        href="/resume.pdf"
-        download
-        className="inline-block mt-4 bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition duration-300 shadow-md"
+      <section
+        id="home"
+        className="relative min-h-screen flex items-center justify-center md:justify-start bg-gradient-to-br from-blue-100 to-purple-100 px-6 overflow-hidden"
       >
-        📄 Download Resume
-      </a>
-    </div>
-  </div>
-</section>
+        <Particles
+          id="tsparticles"
+          init={particlesInit}
+          className="absolute inset-0 z-0"
+          options={{
+            background: { color: { value: "transparent" } },
+            fpsLimit: 60,
+            interactivity: {
+              events: {
+                onHover: { enable: true, mode: "repulse" },
+                resize: true,
+              },
+            },
+            particles: {
+              color: { value: "#7c3aed" },
+              links: {
+                color: "#7c3aed",
+                distance: 150,
+                enable: true,
+                opacity: 0.5,
+                width: 1,
+              },
+              collisions: { enable: false },
+              move: {
+                direction: "none",
+                enable: true,
+                outModes: { default: "bounce" },
+                speed: 1,
+              },
+              number: { value: 40 },
+              opacity: { value: 0.4 },
+              shape: { type: "circle" },
+              size: { value: { min: 1, max: 3 } },
+            },
+            detectRetina: true,
+          }}
+        />
+
+        <div className="relative z-10 max-w-7xl w-full flex flex-col md:flex-row items-center md:items-start gap-12">
+          <div
+            ref={imageRef}
+            className="w-[400px] h-[400px] border-4 border-gradient-to-tr from-purple-500 via-pink-400 to-yellow-300 rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 hover:rotate-1 transition duration-500 ease-in-out"
+          >
+            <Image
+              src="/manish.jpg"
+              alt="Manish"
+              width={400}
+              height={400}
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          <div
+            ref={contentRef}
+            className="flex-1 text-center md:text-left space-y-4 md:mt-12"
+          >
+            <h1 className="text-5xl font-extrabold text-gray-800">
+              Hi, I&apos;m <span className="text-purple-600 hover:text-green-500 transition-colors duration-300 cursor-pointer">Manish</span>
+            </h1>
+
+            <p className="text-xl text-gray-700">
+              <Typewriter
+                words={["Frontend Developer", "React Enthusiast", "Next.js", "MongoDB"]}
+                loop={true}
+                cursor
+                cursorStyle="|"
+                typeSpeed={70}
+                deleteSpeed={50}
+                delaySpeed={1000}
+              />
+            </p>
+
+            <p className="text-xl text-gray-700">
+              Frontend Developer | Passionate Coder with high dreams
+            </p>
+            <p className="text-2xl text-red-500 font-semibold">
+              Going more deep with passion of code
+            </p>
+            <a
+              href="/resume.pdf"
+              download
+              className="inline-block mt-4 bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition duration-300 shadow-md"
+            >
+              📄 Download Resume
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* All other sections like About, Projects, Contact remain unchanged below */}
+
 
 
       {/* About */}

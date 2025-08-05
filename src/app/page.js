@@ -72,7 +72,6 @@ export default function Home() {
 
   useEffect(() => {
     if (!scrollContentRef.current || !projectsContainerRef.current) return;
-
     gsap.to(scrollContentRef.current, {
       x: () =>
         -(
@@ -92,7 +91,6 @@ export default function Home() {
         invalidateOnRefresh: true,
       },
     });
-
     return () => ScrollTrigger.killAll();
   }, []);
 
@@ -102,6 +100,7 @@ export default function Home() {
 
   return (
     <div className="scroll-smooth font-sans">
+      {/* Home Section */}
       <section
         id="home"
         className="relative min-h-screen flex items-center justify-center md:justify-start bg-gradient-to-br from-blue-100 to-purple-100 px-6 overflow-hidden"
@@ -157,7 +156,6 @@ export default function Home() {
               className="w-full h-full object-cover"
             />
           </div>
-
           <div
             ref={contentRef}
             className="flex-1 text-center md:text-left space-y-4 md:mt-12"
@@ -165,7 +163,6 @@ export default function Home() {
             <h1 className="text-5xl font-extrabold text-gray-800">
               Hi, I&apos;m <span className="text-purple-600 hover:text-green-500 transition-colors duration-300 cursor-pointer">Manish</span>
             </h1>
-
             <p className="text-xl text-gray-700">
               <Typewriter
                 words={["Frontend Developer", "React Enthusiast", "Next.js", "MongoDB"]}
@@ -177,7 +174,6 @@ export default function Home() {
                 delaySpeed={1000}
               />
             </p>
-
             <p className="text-xl text-gray-700">
               Frontend Developer | Passionate Coder with high dreams
             </p>
@@ -195,171 +191,147 @@ export default function Home() {
         </div>
       </section>
 
-      {/* All other sections like About, Projects, Contact remain unchanged below */}
-
-
-
       {/* About */}
-      <section id="about" className="min-h-screen  flex items-center justify-center bg-purple-200 px-6">
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-7xl items-center">
-    
-    {/* Left: Brief Intro */}
-    <div className="space-y-4 text-left animate-fade-in-left">
-      <h2 className="text-3xl font-bold">About Me</h2>
-      <p className="text-gray-700">
-      Hi, I'm <span className='text-blue-400 font-bold font-sans text-2xl'> Manish</span>, a 20-year-old third-year B.Tech student in Electronics and Communication Engineering at College <span className='text-red-400'>JNU</span>. I'm passionate about creating user-friendly and visually appealing web interfaces as a skilled Frontend Developer. My expertise lies in building dynamic, responsive applications using <span className='underline text-blue-400'>  Next.js, React, CSS, and Tailwind CSS </span>. Beyond coding, I'm proficient in soft skills, including Microsoft Word and Excel, which help me manage projects efficiently and communicate effectively.
-With a strong foundation in both technical and interpersonal skills, I love bringing innovative ideas to life through clean code and modern design. Let's connect to create something amazing together!
-
-
-      </p>
-    </div>
-
-    {/* Middle: Skills */}
-    <div className="space-y-2 text-left animate-fade-in-up">
-      <h3 className="text-2xl font-extrabold top-0.5">Skills</h3>
-      <ul className="list-disc list-inside font-bold text-black">
-        <li>HTML, CSS, JavaScript</li>
-        <li>React, Next.js, Tailwind CSS</li>
-        <li>MongoDB, Node.js</li>
-        <li>Git, GitHub</li>
-      </ul>
-    </div>
-
-    {/* Right: Image + Button */}
-    <div className="flex flex-col items-center animate-fade-in-right space-y-4">
-      <img 
-        src="/manish.jpg" 
-        alt="Your Portrait" 
-        className="w-64 h-64 rounded-xl shadow-lg object-cover transform hover:scale-105 transition duration-500"
-      />
-      <button className="px-6 py-3 rounded-e-full border-2 bg-blue-600 text-white font-semibold shadow-md hover:bg-blue-700 transition duration-300">
-        Hire Me
-      </button>
-    </div>
-
-  </div>
-</section>
-
-
-      
-
-      {/* Projects */}
-    {/* Projects */}
-<section id="projects" className="bg-purple-100">
-  <div ref={projectsContainerRef} className="relative h-screen overflow-hidden">
-    <h2 className="text-3xl font-bold text-center pt-10 pb-4">Projects</h2>
-    <div
-      ref={scrollContentRef}
-      className="flex space-x-8 px-10 py-10 w-max position:relative gap-16"
-      style={{ height: "calc(100vh - 6rem)" }}
-    >
-      {projects.map((project, i) => (
-        <div
-          key={i}
-          className="horizontal-card bg-white w-[300px] flex-shrink-0 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-500"
-        >
-          <div className="h-64 w-full overflow-hidden">
-            <img
-              src={project.img}
-              alt={project.title}
-              className="w-full h-full object-cover hover:scale-110 transition duration-500"
-            />
+      <section id="about" className="min-h-screen flex items-center justify-center bg-purple-200 px-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-7xl items-center">
+          {/* Left: Brief Intro */}
+          <div className="space-y-4 text-left animate-fade-in-left">
+            <h2 className="text-3xl font-bold">About Me</h2>
+            <p className="text-gray-700">
+              Hi, I&apos;m <span className='text-blue-400 font-bold font-sans text-2xl'> Manish</span>, a 20-year-old third-year B.Tech student in Electronics and Communication Engineering at College <span className='text-red-400'>JNU</span>. I&apos;m passionate about creating user-friendly and visually appealing web interfaces as a skilled Frontend Developer. My expertise lies in building dynamic, responsive applications using <span className='underline text-blue-400'> Next.js, React, CSS, and Tailwind CSS </span>. Beyond coding, I&apos;m proficient in soft skills, including Microsoft Word and Excel, which help me manage projects efficiently and communicate effectively. With a strong foundation in both technical and interpersonal skills, I love bringing innovative ideas to life through clean code and modern design. Let&apos;s connect to create something amazing together!
+            </p>
           </div>
-          <div className="p-4">
-            <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-            <p className="text-gray-600">{project.desc}</p>
+          {/* Middle: Skills */}
+          <div className="space-y-2 text-left animate-fade-in-up">
+            <h3 className="text-2xl font-extrabold top-0.5">Skills</h3>
+            <ul className="list-disc list-inside font-bold text-black">
+              <li>HTML, CSS, JavaScript</li>
+              <li>React, Next.js, Tailwind CSS</li>
+              <li>MongoDB, Node.js</li>
+              <li>Git, GitHub</li>
+            </ul>
+          </div>
+          {/* Right: Image + Button */}
+          <div className="flex flex-col items-center animate-fade-in-right space-y-4">
+            <Image
+              src="/manish.jpg"
+              alt="Your Portrait"
+              width={256}
+              height={256}
+              className="w-64 h-64 rounded-xl shadow-lg object-cover transform hover:scale-105 transition duration-500"
+            />
+            <button className="px-6 py-3 rounded-e-full border-2 bg-blue-600 text-white font-semibold shadow-md hover:bg-blue-700 transition duration-300">
+              Hire Me
+            </button>
           </div>
         </div>
-      ))}
-    </div>
-    
-  </div>
-</section>
+      </section>
 
-
+      {/* Projects */}
+      <section id="projects" className="bg-purple-100">
+        <div ref={projectsContainerRef} className="relative h-screen overflow-hidden">
+          <h2 className="text-3xl font-bold text-center pt-10 pb-4">Projects</h2>
+          <div
+            ref={scrollContentRef}
+            className="flex space-x-8 px-10 py-10 w-max position:relative gap-16"
+            style={{ height: "calc(100vh - 6rem)" }}
+          >
+            {projects.map((project, i) => (
+              <div
+                key={i}
+                className="horizontal-card bg-white w-[300px] flex-shrink-0 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-500"
+              >
+                <div className="h-64 w-full overflow-hidden">
+                  <Image
+                    src={project.img}
+                    alt={project.title}
+                    width={300}
+                    height={256}
+                    className="w-full h-full object-cover hover:scale-110 transition duration-500"
+                    unoptimized={project.img.startsWith('http')}
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+                  <p className="text-gray-600">{project.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Contact */}
       <section
-      id="contact"
-      className="min-h-screen flex items-center justify-center relative bg-red-300"
-      // style={{
-      //   backgroundImage: "url('https://i.pinimg.com/736x/45/2f/cb/452fcb557bd9850858f851860b7f5266.jpg')", // replace with your image path
-      // }}
-    >
-      <div className="absolute inset-0 bg-black bg-opacity-50 z-0" />
-      <div
-        ref={formRef}
-        className="relative z-10 max-w-lg w-full bg-white/80 backdrop-blur-sm p-8 rounded-lg shadow-xl space-y-6"
+        id="contact"
+        className="min-h-screen flex items-center justify-center relative bg-red-300"
       >
-        <h2 className="text-3xl font-bold text-center text-gray-800">
-          Contact Me
-        </h2>
-
-        <form
-          action="https://formspree.io/f/your-form-id"
-          method="POST"
-          encType="text/plain"
-          className="space-y-4"
+        <div className="absolute inset-0 bg-black bg-opacity-50 z-0" />
+        <div
+          ref={formRef}
+          className="relative z-10 max-w-lg w-full bg-white/80 backdrop-blur-sm p-8 rounded-lg shadow-xl space-y-6"
         >
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Your Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              required
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-purple-500 focus:border-purple-500"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Your Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              required
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-purple-500 focus:border-purple-500"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Message
-            </label>
-            <textarea
-              name="message"
-              rows="4"
-              required
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-purple-500 focus:border-purple-500"
-            ></textarea>
-          </div>
-
-          <button
-            type="submit"
-            className="w-full bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300"
+          <h2 className="text-3xl font-bold text-center text-gray-800">
+            Contact Me
+          </h2>
+          <form
+            action="https://formspree.io/f/your-form-id"
+            method="POST"
+            encType="text/plain"
+            className="space-y-4"
           >
-            Send Message
-          </button>
-        </form>
-
-        <div className="text-center text-sm text-gray-600 pt-4">
-          Or reach me at: <br />
-          <a
-            href="km9474789@gmail.com"
-            className="text-purple-700 underline"
-          >
-           Email Me
-          </a>{" "}
-          | +91-8383082278
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Your Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                required
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-purple-500 focus:border-purple-500"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Your Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                required
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-purple-500 focus:border-purple-500"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Message
+              </label>
+              <textarea
+                name="message"
+                rows="4"
+                required
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-purple-500 focus:border-purple-500"
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300"
+            >
+              Send Message
+            </button>
+          </form>
+          <div className="text-center text-sm text-gray-600 pt-4">
+            Or reach me at: <br />
+            <a
+              href="mailto:km9474789@gmail.com"
+              className="text-purple-700 underline"
+            >
+              Email Me
+            </a>{" "}
+            | +91-8383082278
+          </div>
         </div>
-      </div>
-    </section>
-
-     
-     
+      </section>
     </div>
   );
 }
